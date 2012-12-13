@@ -7,6 +7,8 @@ require('du')('/home/rvagg/.npm/', function (err, size) {
 })
 ```
 
+Also comes with a `dujs` command if installed with `npm install du -g`, just in case `du -sb` was too many 2 too many characters for you to type.
+
 One day, I'll expand it with an `options` parameter to do similar stuff to the actual `du` command. Or perhaps you could submit a pull request if you require something?
 
 
