@@ -9,8 +9,19 @@ require('du')('/home/rvagg/.npm/', function (err, size) {
 
 Also comes with a `dujs` command if installed with `npm install du -g`, just in case `du -sb` was too many 2 too many characters for you to type.
 
-One day, I'll expand it with an `options` parameter to do similar stuff to the actual `du` command. Or perhaps you could submit a pull request if you require something?
+## options
 
+An optional `options` object may be passed as the second argument. Currently there is only one option, a `'filter'` function that is passed a full file path and is expected to return a truthy/falsy value to indicate whether the file is included in size calculations.
+
+```js
+du(
+    '/tmp/foo.leveldb/'
+  , { filter: function (f) { return /\.sst$/.test(f) } }
+  , function (err, size) {
+      console.log('The size of the sst files in /tmp/foo.leveldb/ is:', size, 'bytes')
+    }
+)
+```
 
 *Copyright (c) 2012 [Rod Vagg](https://github.com/rvagg) ([@rvagg](https://twitter.com/rvagg))*
 
