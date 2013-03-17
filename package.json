@@ -5,7 +5,7 @@
   , "name": "du"
   , "description": "A simple JavaScript implementation of `du -sb`"
   , "keywords": [ "du", "size" ]
-  , "version": "0.0.0-1"
+  , "version": "0.0.1"
   , "main": "index.js"
   , "bin": {
         "dujs": "./du.js"
