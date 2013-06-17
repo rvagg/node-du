@@ -10,7 +10,7 @@ function du (dir, options, callback) {
     options  = {}
   }
 
-  fs.stat(dir = path.resolve(dir), function (err, stat) {
+  fs.lstat(dir = path.resolve(dir), function (err, stat) {
     if (err) return callback(err)
 
     if (!stat) return callback(null, 0)
