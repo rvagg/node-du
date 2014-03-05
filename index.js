@@ -15,8 +15,10 @@ function du (dir, options, callback) {
 
     if (!stat) return callback(null, 0)
 
+    var size = options.disk ? (512 * stat.blocks) : stat.size
+
     if (!stat.isDirectory())
-      return callback(null, !options.filter || options.filter(dir) ? stat.size : 0)
+      return callback(null, !options.filter || options.filter(dir) ? size : 0)
 
     fs.readdir(dir, function (err, list) {
       if (err) return callback(err)
@@ -33,7 +35,7 @@ function du (dir, options, callback) {
                 err
               , sizes && sizes.reduce(function (p, s) {
                   return p + s
-                }, stat.size)
+                }, size)
             )
           }
       )
