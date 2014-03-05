@@ -1,26 +1,29 @@
 {
-    "authors"         : [
-        "Rod Vagg @rvagg <rod@vagg.org> (https://github.com/rvagg)"
-    ]
-  , "name": "du"
-  , "description": "A simple JavaScript implementation of `du -sb`"
-  , "keywords": [ "du", "size" ]
-  , "version": "0.0.2"
-  , "main": "index.js"
-  , "bin": {
-        "dujs": "./du.js"
-    }
-  , "scripts": {
-        "test": "node tests.js"
-    }
-  , "dependencies": {
-        "async": "~0.1.22"
-    }
-  , "devDependencies": {
-        "mkfiletree": "*"
-    }
-  , "repository"      : {
-        "type"            : "git"
-      , "url"             : "https://github.com/rvagg/node-du.git"
-    }
+  "authors": [
+    "Rod Vagg @rvagg <rod@vagg.org> (https://github.com/rvagg)"
+  ],
+  "name": "du",
+  "description": "A simple JavaScript implementation of `du -sb`",
+  "keywords": [
+    "du",
+    "size"
+  ],
+  "version": "0.1.0",
+  "main": "index.js",
+  "bin": {
+    "dujs": "./du.js"
+  },
+  "scripts": {
+    "test": "node tests.js"
+  },
+  "dependencies": {
+    "async": "~0.1.22"
+  },
+  "devDependencies": {
+    "mkfiletree": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rvagg/node-du.git"
+  }
 }
