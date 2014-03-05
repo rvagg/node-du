@@ -11,7 +11,9 @@ Also comes with a `dujs` command if installed with `npm install du -g`, just in 
 
 ## options
 
-An optional `options` object may be passed as the second argument. Currently there is only one option, a `'filter'` function that is passed a full file path and is expected to return a truthy/falsy value to indicate whether the file is included in size calculations.
+An optional `options` object may be passed as the second argument. Currently there is only two options,
+a `'filter'` function that is passed a full file path and is expected to return a truthy/falsy value to indicate whether the file is included in size calculations
+and a `disk` option. If disk is true, then block sizing is used when calculating the size. (get's you closer to real du numbers).
 
 ```js
 du(
