@@ -10,7 +10,11 @@ function du (dir, options, callback) {
     options  = {}
   }
 
-  fs.lstat(dir = path.resolve(dir), function (err, stat) {
+  dir = path.resolve(dir)
+  if (options.filter && options.filter(dir))
+    return callback(null, 0)
+
+  fs.lstat(dir, function (err, stat) {
     if (err) return callback(err)
 
     if (!stat) return callback(null, 0)
@@ -18,7 +22,7 @@ function du (dir, options, callback) {
     var size = options.disk ? (512 * stat.blocks) : stat.size
 
     if (!stat.isDirectory())
-      return callback(null, !options.filter || options.filter(dir) ? size : 0)
+      return callback(null, size)
 
     fs.readdir(dir, function (err, list) {
       if (err) return callback(err)
