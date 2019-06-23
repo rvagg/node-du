@@ -50,7 +50,6 @@ async function test (asPromises) {
     let adjusted = size - bigboy.length * 5
     let expected = 8192 * 5
     assert(adjusted <= expected, 'adjusted size (' + size + ' -> ' + adjusted + ') <= ' + expected)
-    console.log(`${asPromises}, ${size}, ${adjusted} <> ${expected}`)
   }
 
   function afterFilteredDu (size) {
@@ -58,7 +57,6 @@ async function test (asPromises) {
     let adjusted = size - bigboy.length * 3
     let expected = 8192 * 3
     assert(adjusted <= expected, 'leftover size (' + size + ' -> ' + adjusted + ') <= ' + expected)
-    console.log(`${asPromises} filtered, ${size}, ${adjusted} <> ${expected}`)
   }
 }
 
