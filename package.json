@@ -4,6 +4,7 @@
   ],
   "name": "du",
   "description": "A simple JavaScript implementation of `du -sb`",
+  "license": "MIT",
   "keywords": [
     "du",
     "size"
@@ -17,10 +18,10 @@
     "test": "node tests.js"
   },
   "dependencies": {
-    "async": "~0.1.22"
+    "map-async": "~0.1.1"
   },
   "devDependencies": {
-    "mkfiletree": "*"
+    "mkfiletree": "~2.0.0"
   },
   "repository": {
     "type": "git",

@@ -1,31 +1,33 @@
 # node-du
-A simple JavaScript / Node.js implementation of `du -sb`. Available in npm as *du*
+
+A simple JavaScript / Node.js implementation of `du -sb`. Available in npm as *du*.
+
+[![NPM](https://nodei.co/npm/du.svg)](https://nodei.co/npm/du/)
 
 ```js
-require('du')('/home/rvagg/.npm/', function (err, size) {
-  console.log('The size of /home/rvagg/.npm/ is:', size, 'bytes')
-})
+const du = require('du')
+
+let size = await du('/home/rvagg/.npm/')
+console.log(`The size of /home/rvagg/.npm/ is: ${size} bytes`)
 ```
 
 Also comes with a `dujs` command if installed with `npm install du -g`, just in case `du -sb` was too many 2 too many characters for you to type.
 
-## options
+## API: `du(directory[, options[, callback]])`
 
-An optional `options` object may be passed as the second argument. Currently there is only two options,
-a `'filter'` function that is passed a full file path and is expected to return a truthy/falsy value to indicate whether the file is included in size calculations
-and a `disk` option. If disk is true, then block sizing is used when calculating the size. (get's you closer to real du numbers).
+* `options`: An optional `options` object may be passed as the second argument. Currently there is only two options, a `'filter'` function that is passed a full file path and is expected to return a truthy/falsy value to indicate whether the file is included in size calculations and a `disk` option. If disk is true, then block sizing is used when calculating the size. (get's you closer to real du numbers).
+* `callback`: If you supply a `callback` you'll get `(error, size)` called on it. If you don't supply a `callback`, `du()` returns a `Promise` which you can `await` on for `size`.
+
+With a filter option:
 
 ```js
-du(
-    '/tmp/foo.leveldb/'
-  , { filter: function (f) { return /\.sst$/.test(f) } }
-  , function (err, size) {
-      console.log('The size of the sst files in /tmp/foo.leveldb/ is:', size, 'bytes')
-    }
-)
+let size = await du('/tmp/foo.leveldb/', { filter: function (f) { return /\.sst$/.test(f) } })
+console.log(`The size of the sst files in /tmp/foo.leveldb/ is: ${size} bytes`)
 ```
 
-*Copyright (c) 2012 [Rod Vagg](https://github.com/rvagg) ([@rvagg](https://twitter.com/rvagg))*
+## Licence and Copyright
+
+Copyright (c) 2012 [Rod Vagg](https://github.com/rvagg)
 
 Made available under the MIT licence:
 
