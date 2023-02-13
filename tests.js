@@ -23,13 +23,19 @@ async function make () {
 }
 
 async function test (asPromises) {
-  let filter = { filter: (f) => /(a|e|f)$/.test(f) }
-  let dir = await make()
+  const filter = { filter: (f) => /(a|e|f)$/.test(f) }
+  const ignoreErrors = { ignoreErrors: true }
+  const dir = await make()
 
   if (!asPromises) {
     du(dir, function (err, size) {
       assert.ifError(err)
       afterDu(size)
+    })
+
+    du(dir, ignoreErrors, function (err, size) {
+      assert.ifError(err)
+      afterIgnoreErrorsDu(size)
     })
 
     du(dir, filter, (err, size) => {
@@ -39,7 +45,8 @@ async function test (asPromises) {
   } else {
     return Promise.all([
       du(dir).then(afterDu),
-      du(dir, filter).then(afterFilteredDu)
+      du(dir, filter).then(afterFilteredDu),
+      du(dir, ignoreErrors).then(afterIgnoreErrorsDu),
     ])
   }
 
@@ -47,15 +54,22 @@ async function test (asPromises) {
     mkfiletree.cleanUp()
     // write 5 x bigboys
     // account for 6 x directory entries, reasonably taking up a max of 8192b each
-    let adjusted = size - bigboy.length * 5
-    let expected = 8192 * 5
+    const adjusted = size - bigboy.length * 5
+    const expected = 8192 * 5
     assert(adjusted <= expected, 'adjusted size (' + size + ' -> ' + adjusted + ') <= ' + expected)
   }
 
   function afterFilteredDu (size) {
     mkfiletree.cleanUp()
-    let adjusted = size - bigboy.length * 3
-    let expected = 8192 * 3
+    const adjusted = size - bigboy.length * 3
+    const expected = 8192 * 3
+    assert(adjusted <= expected, 'leftover size (' + size + ' -> ' + adjusted + ') <= ' + expected)
+  }
+
+  function afterIgnoreErrorsDu (size) {
+    mkfiletree.cleanUp()
+    const adjusted = size - bigboy.length * 5
+    const expected = 2048000
     assert(adjusted <= expected, 'leftover size (' + size + ' -> ' + adjusted + ') <= ' + expected)
   }
 }

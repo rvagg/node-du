@@ -10,6 +10,10 @@ function du (dir, options, callback) {
 
   function afterLstat (err, stat) {
     if (err) {
+      if (options.ignoreErrors)
+      {
+        return callback(null, 0)
+      }
       return callback(err)
     }
 
